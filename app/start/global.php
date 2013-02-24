@@ -13,9 +13,9 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+  app_path().'/controllers',
+  app_path().'/models',
+  app_path().'/database/seeds',
 
 ));
 
@@ -49,7 +49,7 @@ Log::useDailyFiles(__DIR__.'/../storage/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+  Log::error($exception);
 });
 
 /*
@@ -64,3 +64,11 @@ App::error(function(Exception $exception, $code)
 */
 
 require __DIR__.'/../filters.php';
+
+// Events
+
+App::missing(function ($exception) {
+
+  return Response::json()->setStatusCode(404);
+
+});
