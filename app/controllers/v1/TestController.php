@@ -1,5 +1,6 @@
 <?php namespace V1;
 
+use Entities\Test;
 use Response;
 
 class TestController extends \BaseController {
@@ -10,7 +11,7 @@ class TestController extends \BaseController {
    * @return Response
    */
   public function index() {
-    return Response::json(['test' => true]);
+    return Test::all();
   }
 
   /**
@@ -19,10 +20,7 @@ class TestController extends \BaseController {
    * @return Response
    */
   public function show($id) {
-    return Response::json([
-      'id' => $id,
-      'test' => true
-    ]);
+    return Test::find($id);
   }
 
 }
