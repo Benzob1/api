@@ -18,6 +18,7 @@ Route::get('/', function()
 
 Route::group(['prefix' => 'v1'], function () {
 
+  Route::resource('county', 'V1\\CountyController', ['only' => ['index', 'show']]);
   Route::resource('test', 'V1\\TestController', ['only' => ['index', 'show']]);
 
 });
