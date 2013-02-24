@@ -13,5 +13,11 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+  return View::make('hello');
+});
+
+Route::group(['prefix' => 'v1'], function () {
+
+  Route::resource('test', 'V1\\TestController', ['only' => ['index', 'show']]);
+
 });
