@@ -10,4 +10,8 @@ class Area extends Base {
     return $this->belongsTo('Entities\\County');
   }
 
+  function employment() {
+    return $this->hasMany('Entities\\Employment', 'city_id');
+  }
+
 }
