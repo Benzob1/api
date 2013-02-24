@@ -20,6 +20,7 @@ Route::group(['prefix' => 'v1'], function () {
 
   Route::resource('area', 'V1\\AreaController', ['only' => ['index', 'show']]);
   Route::resource('county', 'V1\\CountyController', ['only' => ['index', 'show']]);
+  Route::resource('employment', 'V1\\EmploymentController', ['only' => ['index', 'show']]);
   Route::resource('test', 'V1\\TestController', ['only' => ['index', 'show']]);
 
 });

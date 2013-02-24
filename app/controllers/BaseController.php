@@ -2,16 +2,37 @@
 
 class BaseController extends Controller {
 
+  protected
+    $entity = '';
+
+  protected function getEntity() {
+    return 'Entities\\'.$this->entity;
+  }
+
+  protected function getWithParam() {
+    return explode(',', Input::get('with'));
+  }
+
+  function index() {
+    $ent = $this->getEntity();
+    if (Input::has('with')) {
+      return $ent::with($this->getWithParam())->get();
+    } else {
+      return $ent::get();
+    }
+  }
+
   /**
-   * Setup the layout used by the controller.
+   * Display the specified resource.
    *
-   * @return void
+   * @return Response
    */
-  protected function setupLayout()
-  {
-    if ( ! is_null($this->layout))
-    {
-      $this->layout = View::make($this->layout);
+  public function show($id) {
+    $ent = $this->getEntity();
+    if (Input::has('with')) {
+      return $ent::with($this->getWithParam())->find($id);
+    } else {
+      return $ent::find($id);
     }
   }
 
