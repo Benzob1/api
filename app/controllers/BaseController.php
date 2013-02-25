@@ -37,16 +37,14 @@ class BaseController extends Controller {
   }
 
   protected function render($data) {
-    $type = Input::get('type');
-    switch ($type) {
-      case 'jsonp':
-        $resp = Response::make(View::make('jsonp')
-          ->with('callback', Input::get('callback', 'callback'))
-          ->with('json', $this->jsonify($data)));
-        $resp->headers->set('Content-Type', 'text/javascript; charset=utf8');
-        return $resp;
-      default:
-        return $data;
+    if (Input::has('callback')) {
+      $resp = Response::make(View::make('jsonp')
+        ->with('callback', Input::get('callback', 'callback'))
+        ->with('json', $this->jsonify($data)));
+      $resp->headers->set('Content-Type', 'text/javascript; charset=utf8');
+      return $resp;
+    } else {
+      return $data;
     }
   }
 
