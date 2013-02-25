@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-  return View::make('hello');
+Route::get('/', function() {
+  return Redirect::to('http://www.marist.edu/management/bureau');
 });
 
 Route::group(['prefix' => 'v1'], function () {

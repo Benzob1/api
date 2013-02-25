@@ -16,9 +16,37 @@ class BaseController extends Controller {
   function index() {
     $ent = $this->getEntity();
     if (Input::has('with')) {
-      return $ent::with($this->getWithParam())->get();
+      return $this->render(
+        $ent::with($this->getWithParam())->get()
+      );
     } else {
-      return $ent::get();
+      return $this->render(
+        $ent::get()
+      );
+    }
+  }
+
+  protected function jsonify($data) {
+    if (is_array($data)) {
+      return array_map(function ($model) {
+        return json_encode($model->toArray());
+      }, $data);
+    } else {
+      return json_encode($data->toArray());
+    }
+  }
+
+  protected function render($data) {
+    $type = Input::get('type');
+    switch ($type) {
+      case 'jsonp':
+        $resp = Response::make(View::make('jsonp')
+          ->with('callback', Input::get('callback', 'callback'))
+          ->with('json', $this->jsonify($data)));
+        $resp->headers->set('Content-Type', 'text/javascript; charset=utf8');
+        return $resp;
+      default:
+        return $data;
     }
   }
 
@@ -27,12 +55,16 @@ class BaseController extends Controller {
    *
    * @return Response
    */
-  public function show($id) {
+  function show($id) {
     $ent = $this->getEntity();
     if (Input::has('with')) {
-      return $ent::with($this->getWithParam())->find($id);
+      return $this->render(
+        $ent::with($this->getWithParam())->find($id)
+      );
     } else {
-      return $ent::find($id);
+      return $this->render(
+        $ent::find($id)
+      );
     }
   }
 
