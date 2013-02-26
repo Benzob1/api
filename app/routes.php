@@ -15,11 +15,11 @@ Route::get('/', function() {
   return Redirect::to('http://www.marist.edu/management/bureau');
 });
 
-Route::group(['prefix' => 'v1'], function () {
+Route::group(array('prefix' => 'v1'), function () {
 
-  Route::resource('area', 'V1\\AreaController', ['only' => ['index', 'show']]);
-  Route::resource('county', 'V1\\CountyController', ['only' => ['index', 'show']]);
-  Route::resource('employment', 'V1\\EmploymentController', ['only' => ['index', 'show']]);
-  Route::resource('test', 'V1\\TestController', ['only' => ['index', 'show']]);
+  Route::resource('area', 'V1\\AreaController', array('only' => array('index', 'show')));
+  Route::resource('county', 'V1\\CountyController', array('only' => array('index', 'show')));
+  Route::resource('employment', 'V1\\EmploymentController', array('only' => array('index', 'show')));
+  Route::resource('test', 'V1\\TestController', array('only' => array('index', 'show')));
 
 });

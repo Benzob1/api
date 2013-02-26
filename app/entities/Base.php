@@ -9,6 +9,6 @@ class Base extends Eloquent {
    *
    * @var array
    */
-  protected $hidden = ['batch_id', 'created_at'];
+  protected $hidden = array('batch_id', 'created_at');
 
 }
