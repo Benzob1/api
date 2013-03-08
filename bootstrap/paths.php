@@ -1,5 +1,9 @@
 <?php
 
+$environments = array(
+  'dev' => array('*mber.colbyr.com'),
+);
+
 return array(
 
 	/*
